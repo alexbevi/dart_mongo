@@ -10,7 +10,7 @@ class PeopleController {
     handle();
   }
 
-  HttpRequestBody _reqBody;
+  final HttpRequestBody _reqBody;
   final HttpRequest _req;
   final DbCollection _store;
 
@@ -47,7 +47,7 @@ class PeopleController {
   }
 
   handlePut() async {
-    var id = int.parse(_req.uri.queryParameters['id']);
+    var id = int.tryParse(_req.uri.queryParameters['id'] ?? '');
     var itemToPut = await _store.findOne(where.eq('id', id));
 
     if (itemToPut == null) {
@@ -58,7 +58,7 @@ class PeopleController {
   }
 
   handleDelete() async {
-    var id = int.parse(_req.uri.queryParameters['id']);
+    var id = int.tryParse(_req.uri.queryParameters['id'] ?? '');
     var itemToDelete = await _store.findOne(where.eq('id', id));
     if (itemToDelete != null) {
       _req.response.write(await _store.remove(itemToDelete));
@@ -66,7 +66,7 @@ class PeopleController {
   }
 
   handlePatch() async {
-    var id = int.parse(_req.uri.queryParameters['id']);
+    var id = int.tryParse(_req.uri.queryParameters['id'] ?? '');
     var itemToPatch = await _store.findOne(where.eq('id', id));
     _req.response
         .write(await _store.update(itemToPatch, {r'$set': _reqBody.body}));
