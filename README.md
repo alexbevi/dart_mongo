@@ -2,6 +2,8 @@
 
 This projects demonstrates how to talk to a MongoDB database.
 
+See video: https://www.youtube.com/watch?v=Y5X5rdzFScs
+
 ## Download and Install MongoDB
 
 Visit [https://docs.mongodb.com/manual/administration/install-community/](https://docs.mongodb.com/manual/administration/install-community/) and select your OS for instructions.
